@@ -9,7 +9,7 @@ import org.kde.plasma.plasmoid 2.0
 Item {
     id: root
 
-    property string icon: Qt.resolvedUrl("nvidia-off.svg")
+    property string icon: Qt.resolvedUrl("amdgpu-off.svg")
     property bool stat: false
 
     Component.onCompleted: {
@@ -37,7 +37,7 @@ Item {
     }
 
     function check() {
-        executable.exec("nvidia-settings -q=GPUUtilization -t")
+        executable.exec("doas amdgpu-prime-status")
     }
 
     Connections {
@@ -47,10 +47,10 @@ Item {
             var formattedText2 = parseInt(formattedText.replace(/\D+/g, ""))
             var errorText = stderr
             if (formattedText2 > 0) {
-                root.icon = Qt.resolvedUrl("nvidia-on.svg")
+                root.icon = Qt.resolvedUrl("amdgpu-on.svg")
                 root.stat = true
             } else {
-                root.icon = Qt.resolvedUrl("nvidia-off.svg")
+                root.icon = Qt.resolvedUrl("amdgpu-off.svg")
                 root.stat = false
             }
         }
@@ -108,7 +108,7 @@ Item {
                     Layout.fillWidth: true
                     height: undefined
                     wrapMode: Text.WordWrap
-                    text: root.stat ? "Nvidia GPU is currently in use" : "Nvidia GPU is currently not used"
+                    text: root.stat ? "AMD dGPU is currently in use" : "AMD dGPU is currently not used"
                     opacity: root.stat ? 1 : 0.8
                     visible: text != ""
                     maximumLineCount: 8

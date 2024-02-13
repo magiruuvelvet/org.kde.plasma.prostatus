@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Prime Render Offload Status
-Comment=Shows status of usage Nvidia graphical card.
+Comment=Shows status of usage AMDGPU graphical card.
 
 Icon=folder-games-symbolic
 Type=Service
